@@ -1,4 +1,4 @@
-import { BlockProps } from './Types';
+import { BlockProps, BlockComponent } from './Types';
 
 export const setArrayObjProp = <T extends {}>(obj: T[], index: number, prop: any, newValue: any): T[] =>
 {
@@ -39,4 +39,41 @@ export const getChangeToElementIndex = (elements: BlockProps[], y: number): numb
 	})
 
 	return newIndex;
+}
+
+export const runCode = (code: number[], availableBlocks: BlockComponent[], trigger: string, ref: React.RefObject<HTMLDivElement>) =>
+{
+	let start = false;
+
+	code.forEach(index =>
+	{
+		const obj = availableBlocks[index](index);
+
+		if (obj.props.type === "event")
+		{
+			if (obj.props.trigger === trigger)
+			{
+				start = true;
+			}
+			return;
+		}
+
+		if (start && ref.current)
+		{
+			(obj as any).run(obj.props.value, ref.current);
+		}
+	});
+}
+
+
+export const extractDigits = (str: string) =>
+{
+	const current_val = str.match(/\d+/g);
+
+	if (current_val && typeof current_val === "object")
+	{
+		return parseInt(current_val[0]);
+	}
+
+	return 0;
 }

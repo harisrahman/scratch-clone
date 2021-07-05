@@ -7,8 +7,8 @@ import Move from "./blocks/Move";
 import Event from "./blocks/Event";
 
 export const availableBlocks: BlockComponent[] = [
-	(key, isOnEditor) => new Event({ index: 0, key: key, type: "event", value: 10, isOnEditor: isOnEditor }),
-	(key, isOnEditor) => new Event({ index: 1, key: key, type: "event", value: 0, trigger: "sprite", isOnEditor: isOnEditor }),
+	(key, isOnEditor) => new Event({ index: 0, key: key, type: "event", trigger: "flag", isOnEditor: isOnEditor }),
+	(key, isOnEditor) => new Event({ index: 1, key: key, type: "event", trigger: "sprite", isOnEditor: isOnEditor }),
 	(key, isOnEditor) => new Move({ index: 2, key: key, type: "motion", value: 10, isOnEditor: isOnEditor }),
 	(key, isOnEditor) => new Rotate({ index: 3, key: key, type: "motion", value: 15, isOnEditor: isOnEditor }),
 	(key, isOnEditor) => new Rotate({ index: 4, key: key, type: "motion", value: -15, isOnEditor: isOnEditor }),

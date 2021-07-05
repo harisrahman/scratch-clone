@@ -4,20 +4,32 @@ export type BlockType = {
 	[key: string]: string
 }
 
-export interface BlockProps
+interface CommonBlockProps
 {
-	key?: number,
 	index: number,
-	type: "motion" | "event",
-	value: number,
-	trigger?: "sprite" | "flag",
+	key?: number,
 	children?: React.ReactNode,
-	isOnEditor?: boolean,
+	isOnEditor?: boolean
+}
 
 
-	// index?: number,
-	// order?: number,
-	// node?: HTMLDivElement
+export interface MotionBlockProps extends CommonBlockProps
+{
+	type: "motion",
+	value: number
+}
+
+export interface EventBlockProps extends CommonBlockProps
+{
+	type: "event",
+	trigger: "sprite" | "flag",
+}
+
+export type BlockProps = MotionBlockProps | EventBlockProps;
+
+export interface Runnable
+{
+	run: (value: number, el: HTMLDivElement) => void;
 }
 
 export type BlockComponent = (key: number, isOnEditor?: boolean) => React.Component<BlockProps>;
@@ -27,3 +39,5 @@ export interface CodeContextType
 	code: number[],
 	setCode: (props: number[]) => void
 };
+
+export type forwardedRefProp = { stageRef: React.RefObject<HTMLDivElement> }
