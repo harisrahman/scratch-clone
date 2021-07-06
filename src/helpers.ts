@@ -1,4 +1,4 @@
-import { BlockProps, BlockComponent } from './Types';
+import { BlockComponent } from './Types';
 
 export const setArrayObjProp = <T extends {}>(obj: T[], index: number, prop: any, newValue: any): T[] =>
 {

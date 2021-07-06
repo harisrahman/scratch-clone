@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Icon({ name, size = 20, className = "" }: { name: string, size: number, className: string })
 {
 	return (

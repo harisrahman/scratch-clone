@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { CodeContext } from './contexts/CodeContext';
 import Palette from "./components/Palette";
 import CodeEditor from "./components/CodeEditor";
 import Stage from "./components/Stage";
-import { BlockProps } from './Types';
 
 export default function App()
 {

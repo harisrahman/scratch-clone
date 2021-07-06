@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-import { useCode } from '../contexts/CodeContext';
 
 import { BlockProps, BlockType } from '../Types';
 
@@ -10,7 +9,6 @@ const colors: BlockType = {
 
 export default function Block(props: BlockProps)
 {
-	const { code, setCode } = useCode();
 	const blockRef = useRef<HTMLDivElement>(null);
 
 	const dragStartHandler = (e: React.DragEvent) =>
@@ -30,16 +28,8 @@ export default function Block(props: BlockProps)
 		}
 	}
 
-	const dragEndHandler = (e: React.DragEvent) =>
-	{
-		// e.preventDefault();
-		// console.log(e);
-
-		// console.log("AS");
-	}
-
 	return (
-		<div ref={blockRef} className={`flex flex-row flex-wrap px-2 py-1 my-2 text-sm cursor-move ${colors[props.type]}`} draggable="true" onDragStart={dragStartHandler} onDragEnd={dragEndHandler} onDragEnter={dragEndHandler}>
+		<div ref={blockRef} className={`flex flex-row flex-wrap px-2 py-1 my-2 text-sm cursor-move ${colors[props.type]}`} draggable="true" onDragStart={dragStartHandler}>
 			{props.children}
 		</div>
 	);

@@ -1,8 +1,6 @@
 import React from "react";
 import { MotionBlockProps, Runnable } from '../../Types';
-// import {  } from '../../helpers';
 import Block from '../Block';
-import Icon from '../Icon';
 
 export default class Move extends React.Component<MotionBlockProps> implements Runnable
 {

@@ -1,7 +1,4 @@
-import React from "react";
-import Block from "./Block";
-import Icon from "./Icon";
-import { BlockProps, BlockComponent } from '../Types';
+import { BlockComponent } from '../Types';
 import Rotate from "./blocks/Rotate";
 import Move from "./blocks/Move";
 import Event from "./blocks/Event";

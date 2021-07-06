@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useCode } from '../contexts/CodeContext';
-import { BlockProps, forwardedRefProp } from '../Types';
+import { forwardedRefProp } from '../Types';
 import { availableBlocks } from "./Palette";
 import Icon from "./Icon";
 import { runCode, getChangeToElementIndex, arrayMove } from "../helpers";
@@ -9,7 +9,6 @@ export default function CodeEditor({ stageRef }: forwardedRefProp)
 {
 	const { code, setCode } = useCode();
 	const blockContainer = useRef<HTMLDivElement>(null);
-
 
 	const dragEndHandler = (e: React.DragEvent) =>
 	{
@@ -32,7 +31,6 @@ export default function CodeEditor({ stageRef }: forwardedRefProp)
 
 			setCode(arrayMove(code, parseInt(dragIndex), newIndex));
 		}
-
 	}
 
 	const flagClicked = () =>
@@ -45,8 +43,6 @@ export default function CodeEditor({ stageRef }: forwardedRefProp)
 		setCode([]);
 		stageRef.current?.style.removeProperty("transform");
 	}
-
-
 
 	return (
 		<div className="flex flex-1 flex-col h-full items-center overflow-auto" onDrop={dropHandler} onDragOver={dragEndHandler}>

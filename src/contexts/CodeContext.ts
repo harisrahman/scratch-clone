@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 import { CodeContextType } from '../Types';
 
 export const CodeContext = createContext<CodeContextType>({
