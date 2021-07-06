@@ -1,6 +1,7 @@
 import { useState } from "react";
 import CatSprite from "./CatSprite";
 import { useCode } from '../contexts/CodeContext';
+import { useStageSprites } from '../contexts/StageSpritesContext';
 import { availableBlocks } from "./Palette";
 import { runCode } from "../helpers";
 import { forwardedRefProp } from '../Types';
@@ -9,9 +10,7 @@ import Icon from "./Icon";
 export default function PreviewArea({ stageRef }: forwardedRefProp)
 {
 	const { code } = useCode();
-	const [clone, setClone] = useState<number>(1);
-
-
+	const { sprites, setSprites } = useStageSprites();
 
 	const spriteClickedHandler = () =>
 	{
@@ -20,14 +19,14 @@ export default function PreviewArea({ stageRef }: forwardedRefProp)
 
 	const cloneClickedHandler = () =>
 	{
-		setClone(clone + 1);
+		setSprites({ count: sprites.count + 1 });
 	}
 
-	const sprites: JSX.Element[] = [];
+	const spriteElements: JSX.Element[] = [];
 
-	for (var i = 0; i < clone; i++)
+	for (var i = 0; i < sprites.count; i++)
 	{
-		sprites.push(<CatSprite key={i} />);
+		spriteElements.push(<CatSprite className="transition-all duration-700" key={i} />);
 	}
 
 	return (
@@ -37,8 +36,8 @@ export default function PreviewArea({ stageRef }: forwardedRefProp)
 					<Icon name="clone" size={20} className="text-yellow-400 " />
 				</button>
 			</div>
-			<div ref={stageRef} className="self-start p-2 transition-all duration-700" onClick={spriteClickedHandler}>
-				{sprites}
+			<div ref={stageRef} className="self-start p-2" onClick={spriteClickedHandler}>
+				{spriteElements}
 			</div>
 		</div >
 	);

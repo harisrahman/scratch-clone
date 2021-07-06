@@ -38,6 +38,14 @@ export interface CodeContextType
 {
 	code: number[],
 	setCode: (props: number[]) => void
-};
+}
+
+export type StageSpriteType = { count: number };
+
+export interface StageSpritesContextType
+{
+	sprites: StageSpriteType,
+	setSprites: (obj: { count: number }) => void
+}
 
 export type forwardedRefProp = { stageRef: React.RefObject<HTMLDivElement> }

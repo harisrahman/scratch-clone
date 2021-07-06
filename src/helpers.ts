@@ -15,7 +15,7 @@ export const setArrayObjProp = <T extends {}>(obj: T[], index: number, prop: any
 	}
 	return obj;
 }
-const childrenArr = (parent: HTMLElement) =>
+export const childrenArr = (parent: HTMLElement) =>
 {
 	const children: HTMLElement[] = [].slice.call(parent!.children);
 	return children;

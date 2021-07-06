@@ -6,7 +6,7 @@ export default function Icon({ name, size = 20, className = "" }: { name: string
 			width={size.toString() + "px"}
 			height={size.toString() + "px"}
 		>
-			<use xlinkHref={`icons/solid.svg#${name}`} />
+			<use xlinkHref={`/icons/solid.svg#${name}`} />
 		</svg>
 	);
 }

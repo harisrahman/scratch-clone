@@ -1,13 +1,15 @@
 import React, { useRef } from "react";
 import { useCode } from '../contexts/CodeContext';
+import { useStageSprites } from '../contexts/StageSpritesContext';
 import { forwardedRefProp } from '../Types';
 import { availableBlocks } from "./Palette";
 import Icon from "./Icon";
-import { runCode, getChangeToElementIndex, arrayMove } from "../helpers";
+import { runCode, getChangeToElementIndex, arrayMove, childrenArr } from "../helpers";
 
 export default function CodeEditor({ stageRef }: forwardedRefProp)
 {
 	const { code, setCode } = useCode();
+	const { sprites, setSprites } = useStageSprites();
 	const blockContainer = useRef<HTMLDivElement>(null);
 
 	const dragEndHandler = (e: React.DragEvent) =>
@@ -41,7 +43,15 @@ export default function CodeEditor({ stageRef }: forwardedRefProp)
 	const trashClicked = () =>
 	{
 		setCode([]);
-		stageRef.current?.style.removeProperty("transform");
+		if (stageRef.current)
+		{
+			setSprites({ count: 1 });
+
+			childrenArr(stageRef.current).forEach(child =>
+			{
+				child.style.removeProperty("transform");
+			})
+		}
 	}
 
 	return (
