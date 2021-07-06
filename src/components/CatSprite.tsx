@@ -2,9 +2,6 @@ import React from "react";
 
 export default function CatSprite({ className = "" }: { className?: string })
 {
-	console.log(className);
-
-
 	return (
 		<svg
 			className={className}

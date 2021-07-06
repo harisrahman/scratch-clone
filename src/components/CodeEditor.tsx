@@ -9,7 +9,7 @@ import { runCode, getChangeToElementIndex, arrayMove, childrenArr } from "../hel
 export default function CodeEditor({ stageRef }: forwardedRefProp)
 {
 	const { code, setCode } = useCode();
-	const { sprites, setSprites } = useStageSprites();
+	const { setSprites } = useStageSprites();
 	const blockContainer = useRef<HTMLDivElement>(null);
 
 	const dragEndHandler = (e: React.DragEvent) =>

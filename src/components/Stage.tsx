@@ -1,4 +1,3 @@
-import { useState } from "react";
 import CatSprite from "./CatSprite";
 import { useCode } from '../contexts/CodeContext';
 import { useStageSprites } from '../contexts/StageSpritesContext';
