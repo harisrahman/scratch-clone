@@ -23,12 +23,14 @@ export const childrenArr = (parent: HTMLElement) =>
 
 
 
-export const getChangeToElementIndex = (parent: HTMLDivElement, draggedElIndex: number, y: number): number =>
+export const getChangeToElementIndex = (parent: HTMLDivElement, y: number, draggedElIndex?: number): number =>
 {
-	let newIndex = draggedElIndex;
 	let closest = Number.POSITIVE_INFINITY;
 
 	const children = childrenArr(parent);
+	let newIndex = draggedElIndex ? draggedElIndex : (children.length);
+	const lastIndex = children.length - 1;
+
 
 	children.forEach((child, index) =>
 	{
@@ -41,6 +43,11 @@ export const getChangeToElementIndex = (parent: HTMLDivElement, draggedElIndex: 
 		{
 			closest = offset;
 			newIndex = index;
+		}
+
+		if (draggedElIndex === undefined && index === lastIndex)
+		{
+			if (y > box.top) newIndex = lastIndex + 1;
 		}
 	})
 
@@ -76,12 +83,21 @@ export const runCode = (code: number[], availableBlocks: BlockComponent[], trigg
 	})
 }
 
-export const arrayMove = (arr: any[], fromIndex: number, toIndex: number) =>
+export const arrayElementMove = (arr: any[], fromIndex: number, toIndex: number) =>
 {
 	const element = arr[fromIndex];
 	const copy = arr.slice();
 	copy.splice(fromIndex, 1);
 	copy.splice(toIndex, 0, element);
+
+	return copy;
+}
+
+
+export const insertAtIndex = (arr: any[], index: number, value: any) =>
+{
+	const copy = arr.slice();
+	copy.splice(index, 0, value);
 
 	return copy;
 }

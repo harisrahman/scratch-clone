@@ -4,7 +4,7 @@ import { useStageSprites } from '../contexts/StageSpritesContext';
 import { forwardedRefProp } from '../Types';
 import { availableBlocks } from "./Palette";
 import Icon from "./Icon";
-import { runCode, getChangeToElementIndex, arrayMove, childrenArr } from "../helpers";
+import { runCode, getChangeToElementIndex, arrayElementMove, insertAtIndex, childrenArr } from "../helpers";
 
 export default function CodeEditor({ stageRef }: forwardedRefProp)
 {
@@ -24,14 +24,27 @@ export default function CodeEditor({ stageRef }: forwardedRefProp)
 
 		if (blockIndex)
 		{
-			setCode([...code, parseInt(blockIndex)]);
+			if (blockContainer.current)
+			{
+				const newIndex = getChangeToElementIndex(blockContainer.current, e.clientY);
+
+				// console.log(newIndex);
+
+
+				setCode(insertAtIndex(code, newIndex, parseInt(blockIndex)));
+			}
+			else
+			{
+				setCode([...code, parseInt(blockIndex)]);
+			}
+
 		}
 		else if (dragIndex && blockContainer.current)
 		{
 			const oldIndex = parseInt(dragIndex);
-			const newIndex = getChangeToElementIndex(blockContainer.current, oldIndex, e.clientY);
+			const newIndex = getChangeToElementIndex(blockContainer.current, e.clientY, oldIndex);
 
-			setCode(arrayMove(code, parseInt(dragIndex), newIndex));
+			setCode(arrayElementMove(code, parseInt(dragIndex), newIndex));
 		}
 	}
 
