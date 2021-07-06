@@ -1,4 +1,4 @@
-import { BlockComponent } from './Types';
+import { BlockComponent, MotionBlockProps } from './Types';
 
 export const setArrayObjProp = <T extends {}>(obj: T[], index: number, prop: any, newValue: any): T[] =>
 {
@@ -15,13 +15,20 @@ export const setArrayObjProp = <T extends {}>(obj: T[], index: number, prop: any
 	}
 	return obj;
 }
+const childrenArr = (parent: HTMLElement) =>
+{
+	const children: HTMLElement[] = [].slice.call(parent!.children);
+	return children;
+}
+
+
 
 export const getChangeToElementIndex = (parent: HTMLDivElement, draggedElIndex: number, y: number): number =>
 {
 	let newIndex = draggedElIndex;
 	let closest = Number.POSITIVE_INFINITY;
 
-	const children: HTMLElement[] = [].slice.call(parent!.children);
+	const children = childrenArr(parent);
 
 	children.forEach((child, index) =>
 	{
@@ -46,11 +53,11 @@ export const runCode = (code: number[], availableBlocks: BlockComponent[], trigg
 
 	code.forEach(index =>
 	{
-		const obj = availableBlocks[index](index);
+		const block = availableBlocks[index](index);
 
-		if (obj.props.type === "event")
+		if (block.props.type === "event")
 		{
-			if (obj.props.trigger === trigger)
+			if (block.props.trigger === trigger)
 			{
 				start = true;
 			}
@@ -59,9 +66,14 @@ export const runCode = (code: number[], availableBlocks: BlockComponent[], trigg
 
 		if (start && ref.current)
 		{
-			(obj as any).run(obj.props.value, ref.current);
+			const children = childrenArr(ref.current);
+
+			children.forEach((child, index) =>
+			{
+				(block as any).run((block.props as MotionBlockProps).value, child);
+			})
 		}
-	});
+	})
 }
 
 export const arrayMove = (arr: any[], fromIndex: number, toIndex: number) =>
