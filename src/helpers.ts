@@ -16,26 +16,25 @@ export const setArrayObjProp = <T extends {}>(obj: T[], index: number, prop: any
 	return obj;
 }
 
-export const getChangeToElementIndex = (elements: BlockProps[], y: number): number =>
+export const getChangeToElementIndex = (parent: HTMLDivElement, draggedElIndex: number, y: number): number =>
 {
-	let newIndex = 0;
+	let newIndex = draggedElIndex;
 	let closest = Number.POSITIVE_INFINITY;
 
-	elements.forEach((el, index) =>
+	const children: HTMLElement[] = [].slice.call(parent!.children);
+
+	children.forEach((child, index) =>
 	{
-		// if (el.node === undefined) return;
+		if (index === draggedElIndex) return;
 
-		// const box = el.node.getBoundingClientRect();
-		// const offset = Math.abs(y - box.top);
+		const box = child.getBoundingClientRect();
+		const offset = Math.abs(y - box.top);
 
-		// console.log(el, offset);
-
-		// if (offset < closest)
-		// {
-		// 	closest = offset;
-		// 	newIndex = index;
-		// newIndex = el.order || newIndex;
-		// }
+		if (offset < closest)
+		{
+			closest = offset;
+			newIndex = index;
+		}
 	})
 
 	return newIndex;
@@ -65,15 +64,12 @@ export const runCode = (code: number[], availableBlocks: BlockComponent[], trigg
 	});
 }
 
-
-export const extractDigits = (str: string) =>
+export const arrayMove = (arr: any[], fromIndex: number, toIndex: number) =>
 {
-	const current_val = str.match(/\d+/g);
+	const element = arr[fromIndex];
+	const copy = arr.slice();
+	copy.splice(fromIndex, 1);
+	copy.splice(toIndex, 0, element);
 
-	if (current_val && typeof current_val === "object")
-	{
-		return parseInt(current_val[0]);
-	}
-
-	return 0;
+	return copy;
 }

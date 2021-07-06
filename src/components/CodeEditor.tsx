@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useCode } from '../contexts/CodeContext';
 import { BlockProps, forwardedRefProp } from '../Types';
 import { availableBlocks } from "./Palette";
 import Icon from "./Icon";
-import { runCode } from "../helpers";
+import { runCode, getChangeToElementIndex, arrayMove } from "../helpers";
 
 export default function CodeEditor({ stageRef }: forwardedRefProp)
 {
 	const { code, setCode } = useCode();
+	const blockContainer = useRef<HTMLDivElement>(null);
+
 
 	const dragEndHandler = (e: React.DragEvent) =>
 	{
@@ -16,12 +18,21 @@ export default function CodeEditor({ stageRef }: forwardedRefProp)
 
 	const dropHandler = (e: React.DragEvent) =>
 	{
-		const blockKey = e.dataTransfer.getData("block_index");
+		const blockIndex = e.dataTransfer.getData("block_index");
+		const dragIndex = e.dataTransfer.getData("drag_index");
 
-		if (blockKey)
+		if (blockIndex)
 		{
-			setCode([...code, parseInt(blockKey)]);
+			setCode([...code, parseInt(blockIndex)]);
 		}
+		else if (dragIndex && blockContainer.current)
+		{
+			const oldIndex = parseInt(dragIndex);
+			const newIndex = getChangeToElementIndex(blockContainer.current, oldIndex, e.clientY);
+
+			setCode(arrayMove(code, parseInt(dragIndex), newIndex));
+		}
+
 	}
 
 	const flagClicked = () =>
@@ -47,7 +58,7 @@ export default function CodeEditor({ stageRef }: forwardedRefProp)
 					<Icon name="flag" size={20} className="text-green-600 " />
 				</button>
 			</div>
-			<div>{
+			<div ref={blockContainer}>{
 				code.map((index: number, key: number) =>
 				{
 					return availableBlocks[index](key, true).render()

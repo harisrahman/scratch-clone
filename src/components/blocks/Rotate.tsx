@@ -1,6 +1,6 @@
 import React from "react";
 import { MotionBlockProps, Runnable } from '../../Types';
-import { extractDigits } from '../../helpers';
+// import {  } from '../../helpers';
 import Block from '../Block';
 import Icon from '../Icon';
 
@@ -8,8 +8,6 @@ export default class Rotate extends React.Component<MotionBlockProps> implements
 {
 	run(value: number, el: HTMLDivElement)
 	{
-		// el.style.transform += `rotate(${value}deg)`;
-
 		let current_val = 0;
 		let rotate = `rotate(${value}deg)`;
 		const regex = el.style.transform.match(/rotate\((-?\d+)deg\)/i);
