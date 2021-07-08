@@ -31,7 +31,7 @@ export default function PreviewArea({ stageRef }: forwardedRefProp)
 	return (
 		<div className="w-full">
 			<div className="flex justify-end">
-				<button className="p-3 m-1 border rounded-full cursor-pointer active:bg-gray-100" onClick={cloneClickedHandler}>
+				<button className="p-3 m-1 border rounded-full cursor-pointer  outline-none active:bg-gray-100" onClick={cloneClickedHandler}>
 					<Icon name="clone" size={20} className="text-yellow-400 " />
 				</button>
 			</div>

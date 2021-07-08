@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-
 import { BlockProps, BlockType } from '../Types';
 
 const colors: BlockType = {

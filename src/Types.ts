@@ -45,7 +45,19 @@ export type StageSpriteType = { count: number };
 export interface StageSpritesContextType
 {
 	sprites: StageSpriteType,
-	setSprites: (obj: { count: number }) => void
+	setSprites: (obj: StageSpriteType) => void
+}
+
+export type ContextMenuType = {
+	block_index?: number
+	x?: number,
+	y?: number
+};
+
+export interface ContextMenuContextType
+{
+	contextMenu: ContextMenuType,
+	setContextMenu: (obj: ContextMenuType) => void
 }
 
 export type forwardedRefProp = { stageRef: React.RefObject<HTMLDivElement> }
