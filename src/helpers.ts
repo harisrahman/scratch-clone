@@ -45,7 +45,7 @@ export const getChangeToElementIndex = (parent: HTMLDivElement, y: number, dragg
 			newIndex = index;
 		}
 
-		if (draggedElIndex === undefined && index === lastIndex)
+		if (draggedElIndex === undefined && index === lastIndex && newIndex != 0)
 		{
 			if (y > box.top) newIndex = lastIndex + 1;
 		}
@@ -92,7 +92,6 @@ export const arrayElementMove = (arr: any[], fromIndex: number, toIndex: number)
 
 	return copy;
 }
-
 
 export const insertAtIndex = (arr: any[], index: number, value: any) =>
 {
