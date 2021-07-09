@@ -31,9 +31,6 @@ export default function CodeEditor({ stageRef }: forwardedRefProp)
 			{
 				const newIndex = getChangeToElementIndex(blockContainer.current, e.clientY);
 
-				// console.log(newIndex);
-
-
 				setCode(insertAtIndex(code, newIndex, parseInt(blockIndex)));
 			}
 			else
@@ -89,8 +86,8 @@ export default function CodeEditor({ stageRef }: forwardedRefProp)
 
 		setContextMenu({
 			block_index,
-			x: e.clientX - blockContainer.current.offsetLeft,
-			y: e.clientY - blockContainer.current.offsetTop
+			x: e.clientX - blockContainer.current.offsetLeft + window.scrollX,
+			y: e.clientY - blockContainer.current.offsetTop + window.scrollY
 		});
 	}
 

@@ -10,7 +10,7 @@ export default function ContextMenu()
 	{
 		if (contextMenu.block_index !== undefined)
 		{
-			setCode(code.concat([contextMenu.block_index]));
+			setCode(code.concat(code[contextMenu.block_index]));
 		}
 		setContextMenu({});
 	}

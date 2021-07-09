@@ -21,8 +21,6 @@ export const childrenArr = (parent: HTMLElement) =>
 	return children;
 }
 
-
-
 export const getChangeToElementIndex = (parent: HTMLDivElement, y: number, draggedElIndex?: number): number =>
 {
 	let closest = Number.POSITIVE_INFINITY;
@@ -45,7 +43,7 @@ export const getChangeToElementIndex = (parent: HTMLDivElement, y: number, dragg
 			newIndex = index;
 		}
 
-		if (draggedElIndex === undefined && index === lastIndex && newIndex != 0)
+		if (draggedElIndex === undefined && index === lastIndex && newIndex !== 0)
 		{
 			if (y > box.top) newIndex = lastIndex + 1;
 		}
