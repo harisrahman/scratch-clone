@@ -25,10 +25,9 @@ export const getChangeToElementIndex = (parent: HTMLDivElement, y: number, dragg
 {
 	let closest = Number.POSITIVE_INFINITY;
 
-	const children = childrenArr(parent);
+	const children = childrenArr(parent).filter(el => el.draggable);
 	let newIndex = draggedElIndex ? draggedElIndex : (children.length);
 	const lastIndex = children.length - 1;
-
 
 	children.forEach((child, index) =>
 	{
@@ -43,7 +42,7 @@ export const getChangeToElementIndex = (parent: HTMLDivElement, y: number, dragg
 			newIndex = index;
 		}
 
-		if (draggedElIndex === undefined && index === lastIndex && newIndex !== 0)
+		if (draggedElIndex === undefined && index === lastIndex)
 		{
 			if (y > box.top) newIndex = lastIndex + 1;
 		}

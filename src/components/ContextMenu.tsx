@@ -1,5 +1,6 @@
 import { useCode } from '../contexts/CodeContext';
 import { useContextMenu } from '../contexts/ContextMenuContext';
+import { insertAtIndex } from "../helpers";
 
 export default function ContextMenu()
 {
@@ -10,7 +11,7 @@ export default function ContextMenu()
 	{
 		if (contextMenu.block_index !== undefined)
 		{
-			setCode(code.concat(code[contextMenu.block_index]));
+			setCode(insertAtIndex(code, contextMenu.block_index, code[contextMenu.block_index]));
 		}
 		setContextMenu({});
 	}
